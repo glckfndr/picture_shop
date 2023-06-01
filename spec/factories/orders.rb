@@ -1,8 +1,10 @@
 FactoryBot.define do
   factory :order do
-    first_name { "MyString" }
-    last_name { "MyString" }
-    address { "MyString" }
-    phone { "MyString" }
+    # Define attributes for the product factory
+    first_name { "Oleh" }
+    last_name { "Bulanchuk" }
+    address { "Lisova 12/13" }
+    phone { "0967856663" }
+
   end
 end
