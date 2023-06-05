@@ -1,0 +1,27 @@
+
+  <div id="<%= product.id %>" class="px-2 m-1 rounded-xl bg-slate-300 hover:animate-pulse" >
+
+  <div class="my-1">
+    <p class="px-4 py-1 my-3 font-serif text-2xl font-semibold truncate rounded-full bg-slate-400">
+      <%= product.name %>
+    </p>
+
+
+    <p class="my-3">
+      <%= product.description %>
+    </p>
+
+    <p class="my-3">
+      Price: <%= product.price %> $
+    </p>
+
+    <p class="my-3">
+      Left in stock: <%= product.balance %>
+    </p>
+
+    <% if action_name != "show" %>
+      <%= link_to "Show", product, class:"show-link" %>
+      <hr class="mt-4">
+    <% end %>
+      </div>
+  </div>
