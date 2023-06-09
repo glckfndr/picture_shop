@@ -1,5 +1,4 @@
-<%= simple_form_for @product, defaults: { input_html: { class: 'block shadow rounded-md border border-gray-500 outline-none px-3 py-2 mt-2 w-2/3' } } do |f| %>
-  <%= render 'layouts/error', item: product %>
+<%= simple_form_for product, defaults: { input_html: { class: 'block shadow rounded-md border border-gray-500 outline-none px-3 py-2 mt-2 w-2/3' } } do |f| %>
 
   <%= f.input :name %>
   <%= f.input :description %>
