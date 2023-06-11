@@ -2,6 +2,6 @@ FactoryBot.define do
   factory :product_order do
     association :product, factory: :product
     association :order, factory: :order
-    amount { 1 }
+    amount { Faker::Number.within(range: 1..7) }
   end
 end
