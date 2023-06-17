@@ -1,0 +1,36 @@
+<table class="table-auto">
+  <thead>
+    <tr>
+      <th>Product Name</th>
+      <th>Product Price</th>
+      <th>Quantity</th>
+      <th>Total Price</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <%  @session_products.each do |x| %>
+      <tr>
+        <td><%= x.name %></td>
+        <td><%= x.price %></td>
+        <td><%= x.quantity %></td>
+        <td><%= x.sum %></td>
+        <td class="flex">
+          <%= button_to 'Plus', plus_path(product_id: x.id ), data: { method: :post} , class:"add-link" %>
+          <%= button_to 'Minus', minus_path(product_id:  x.id ), data: { method: :post} , class:"del-link" %>
+          <%= button_to 'Delete', del_path(product_id:  x.id ), data: { method: :post} , class:"del-link" %>
+        </td>
+      </tr>
+    <% end %>
+
+    <tr>
+      <td><%= link_to 'Back to products', products_path, class: "add-button" %></td>
+      <td><%= link_to 'Checkout', new_order_path, class: "add-button" %></td>
+      <td>Total Sum: </td>
+      <td><%= @sum %></td>
+    </tr>
+
+  </tbody>
+</table>

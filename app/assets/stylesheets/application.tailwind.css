@@ -6,9 +6,40 @@
 
 @layer components {
   .show-link {
-    @apply hover:bg-green-700  inline-block rounded-r-full bg-green-500
-                          px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-neutral-50;
+    @apply inline-block px-5 pb-2 mx-1 my-2 text-xs font-medium text-center uppercase bg-green-500 rounded-r-full pt-7 hover:bg-green-700 text-neutral-50;
   }
+  .add-link {
+    @apply hover:bg-blue-800  inline-block rounded-md bg-blue-500
+              px-5 pb-2 pt-2.5 text-xs mx-1 my-2 font-medium uppercase leading-normal text-neutral-50;
+  }
+
+  .del-link {
+    @apply hover:bg-orange-800  inline-block rounded-md bg-orange-500
+              px-5 pb-2 pt-2.5 text-xs mx-1 my-2 font-medium uppercase leading-normal text-neutral-50;
+  }
+
+
+  .add-button {
+    @apply inline-block px-5 pt-4 pb-2 mx-1 mt-4 text-2xl font-medium leading-normal uppercase bg-blue-500 rounded-md hover:bg-blue-800 text-neutral-50;
+  }
+
+  .del-button {
+    @apply inline-block px-5 pt-4 pb-2 mx-1 mt-4 text-2xl font-medium leading-normal uppercase bg-orange-500 rounded-md hover:bg-orange-800 text-neutral-50;
+  }
+
+  .edit-button {
+    @apply inline-block px-5 pt-4 pb-2 mx-1 mt-4 text-2xl font-medium leading-normal uppercase bg-green-500 rounded-md hover:bg-green-800 text-neutral-50;
+  }
+
+
+  .pr-show {
+    @apply px-4 py-1 my-3 font-serif text-2xl font-semibold truncate rounded-full bg-slate-400;
+  }
+
+  .notice-show {
+    @apply inline-block px-3 py-2 mb-5 text-3xl font-medium text-green-500 rounded-lg bg-green-50;
+  }
+
 }
 
 @keyframes spin {

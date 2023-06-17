@@ -1,0 +1,26 @@
+<div class="w-full mx-auto md:w-2/3">
+  <h1 class="text-3xl font-bold">Show Product</h1>
+
+  <div class="my-1">
+    <p class="pr-show">
+      Name: <%= @product.name %>
+    </p>
+
+    <p class="pr-show">
+      Description: <%= @product.description %>
+    </p>
+
+    <p class="pr-show">
+      Price: <%= @product.price %> $
+    </p>
+
+    <p class="pr-show">
+      Left in stock: <%= @product.balance %>
+    </p>
+
+    <%= link_to 'Back', products_path,  class: "add-button" %>
+    <%= link_to 'Edit', edit_product_path(@product),  class:"edit-button" %>
+    <%= link_to 'Delete', product_path(@product), data: {  turbo_method: :delete, turbo_confirm: "Are you sure?" },  class:"del-button" %>
+
+  </div>
+</div>
