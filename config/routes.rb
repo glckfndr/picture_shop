@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   post '/plus', to: 'carts#plus'
   post '/minus', to: 'carts#minus'
   post '/del', to: 'carts#del'
+  delete '/empty', to: 'carts#empty'
 
   get '/cart', to: 'carts#show'
 

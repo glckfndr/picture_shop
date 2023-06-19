@@ -1,10 +1,8 @@
 class CartsController < ApplicationController
 
   def update
-    #reset_session
     product_name = Product.find(params[:product_id]).name
     Cart::Adder.serve(session, params[:product_id])
-    #sum = Cart::Sum.execute session
     redirect_to products_path, notice: "Product #{product_name} added to cart!"
   end
 
@@ -34,6 +32,11 @@ class CartsController < ApplicationController
 
   def del
     Cart::Remover.serve(session, params[:product_id])
+    redirect_to cart_path
+  end
+
+  def empty
+    Cart::Cleaner.serve session
     redirect_to cart_path
   end
 end

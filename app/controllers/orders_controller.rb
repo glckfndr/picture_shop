@@ -26,23 +26,25 @@ class OrdersController < ApplicationController
       Cart::OrderCreator.serve session, @order.id
       redirect_to order_path(@order), notice: "Order for #{@order.first_name} crteated!"
     else
-      render :new
+      @session_products = Cart::Supplier.serve session
+      @sum = Cart::Summator.serve session
+      render :new, status: :unprocessable_entity
     end
   end
 
   def update
     @order = resource
     if @order.update order_params
-      redirect_to order_path(@order) , notice: "Order updated!"
+      redirect_to order_path(@order), notice: "Order for #{@order.first_name} updated!"
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
     @order = resource
     @order.destroy
-    redirect_to orders_path
+    redirect_to orders_path, notice: "Order for #{@order.first_name} destroyed!"
   end
 
   private

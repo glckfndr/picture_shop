@@ -14,9 +14,11 @@
     </p>
 
     <div class="flex">
-      <%= button_to 'Add to Cart', add_to_cart_path(product_id: product.id), data: { method: :post} , class:"add-link" %>
-      <%= button_to 'Delete from Cart', remove_from_cart_path(product_id: product.id), data: { method: :post} , class:"del-link" %>
-      <%= link_to "Show", product, class:"show-link" %>
+      <%= button_to 'Add to Cart', add_to_cart_path(product_id: product.id),
+                  data: { method: :post} , class:"green-xs-btn" %>
+      <%= button_to 'Delete from Cart', remove_from_cart_path(product_id: product.id),
+                  data: { method: :post} , class:"red-xs-btn" %>
+      <%= link_to "Show", product, class:"blue-xs-btn" %>
     </div>
 
   </div>

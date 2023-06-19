@@ -1,11 +1,14 @@
 class ProductsController < ApplicationController
   def index
     @products = collection
+    @session_products = Cart::Supplier.serve session
+    @sum = Cart::Summator.serve session
 
   end
 
   def show
     @product = resource
+
   end
 
   def new
@@ -19,18 +22,18 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new product_params
     if @product.save
-      redirect_to product_path(@product)
+      redirect_to product_path(@product), notice: "Product #{@product.name} created!"
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
   def update
     @product = resource
     if @product.update product_params
-      redirect_to product_path(@product)
+      redirect_to product_path(@product), notice: "Product #{@product.name} updated!"
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
