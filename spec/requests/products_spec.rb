@@ -34,6 +34,12 @@ RSpec.describe "Products", type: :request do
       expect(response).to be_successful
       expect(response).to render_template(:show)
     end
+
+    it "returns the requested product" do
+      get product_path(product)
+      expect(response.body).to include(product.name)
+      expect(response.body).to include(product.price.to_s)
+    end
   end
 
   describe "GET /new" do
@@ -81,6 +87,48 @@ RSpec.describe "Products", type: :request do
     it 'returns a redirect status' do
       delete product_path(product)
       expect(response).to have_http_status(:redirect)
+    end
+  end
+
+  describe "POST /products" do
+    context "with valid parameters" do
+      let(:valid_params) { {product: attributes_for(:product)} }
+
+      it "creates a new product" do
+        expect{post products_path, params: valid_params}.to change(Product, :count).by(1)
+      end
+
+      it "returns a created response" do
+        post products_path, params: valid_params
+        expect(response).to have_http_status(:redirect)
+      end
+
+      it "returns the created product" do
+        post products_path, params: valid_params
+        expect(response).to redirect_to(product_path(Product.last))
+        get product_path(Product.last)
+        expect(response.body).to include(Product.last.name)
+        expect(response.body).to include(Product.last.price.to_s)
+      end
+    end
+
+    context "with invalid parameters" do
+      let(:invalid_params) {{product: { name: "", price: -1 }} }
+
+      it "does not create a new product" do
+        expect {post products_path, params: invalid_params}.not_to change(Product, :count)
+      end
+
+      it "returns an unprocessable entity response" do
+        post products_path, params: invalid_params
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
+
+      it "returns the validation errors" do
+        post products_path, params: invalid_params
+        expect(response.body).to include(CGI.escapeHTML("can't be blank"))
+        expect(response.body).to include("must be greater than or equal to 0")
+      end
     end
   end
 end
