@@ -1,9 +1,8 @@
 class CartsController < ApplicationController
 
   def update
-    product_name = Product.find(params[:product_id]).name
-    Cart::Adder.serve(session, params[:product_id])
-    redirect_to products_path, notice: "Product #{product_name} added to cart!"
+    Cart::Adder.serve(session, attributes)
+    redirect_to products_path, notice: "Product #{attributes['name']} added to cart!"
   end
 
   def show
@@ -15,23 +14,22 @@ class CartsController < ApplicationController
   end
 
   def delete
-    product_name = Product.find(params[:product_id]).name
-    Cart::Remover.serve(session, params[:product_id])
-    redirect_to products_path, notice: "Product #{product_name} removed from cart!"
+    Cart::Remover.serve(session, attributes)
+    redirect_to products_path, notice: "Product #{attributes['name']} removed from cart!"
   end
 
   def plus
-    Cart::Adder.serve(session, params[:product_id])
+    Cart::Adder.serve(session, attributes)
     redirect_to cart_path
   end
 
   def minus
-    Cart::Decreaser.serve(session, params[:product_id])
+    Cart::Decreaser.serve(session, attributes)
     redirect_to cart_path
   end
 
   def del
-    Cart::Remover.serve(session, params[:product_id])
+    Cart::Remover.serve(session, attributes)
     redirect_to cart_path
   end
 
@@ -39,4 +37,11 @@ class CartsController < ApplicationController
     Cart::Cleaner.serve session
     redirect_to cart_path
   end
+
+  private
+
+  def attributes
+    Product.find(params[:product_id]).attributes
+  end
+
 end

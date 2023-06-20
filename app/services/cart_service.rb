@@ -1,8 +1,10 @@
 class CartService
 
-  def initialize session, id = nil
+  def initialize(session, product = nil)
     @session = session
-    @id = id
+    return if product.nil?
+    @id = product["id"].to_s
+    @balance = product["balance"].to_i
   end
 
   def self.serve(*args, &block)

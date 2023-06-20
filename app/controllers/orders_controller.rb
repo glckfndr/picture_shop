@@ -23,7 +23,7 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new order_params
     if @order.save
-      Cart::OrderCreator.serve session, @order.id
+      Cart::OrderCreator.serve session, @order.attributes
       redirect_to order_path(@order), notice: "Order for #{@order.first_name} crteated!"
     else
       @session_products = Cart::Supplier.serve session
