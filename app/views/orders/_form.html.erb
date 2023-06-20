@@ -1,0 +1,9 @@
+<%= simple_form_for order, defaults: { input_html:
+{ class: 'block text-xl bg-grey-300 shadow rounded-md border border-gray-500 outline-none px-3 py-2 mt-2 w-2/3' } } do |f| %>
+
+  <%= f.input :first_name %>
+  <%= f.input :last_name %>
+  <%= f.input :address %>
+  <%= f.input :phone %>
+  <%= f.button :submit %>
+<% end %>

@@ -1,0 +1,31 @@
+<div class="w-full mx-auto md:w-2/3">
+  <h1 class="text-3xl font-bold">Order for <%= @order.first_name %></h1>
+
+  <%= render "attr_table", order: @order %>
+
+  <!-- Start Cart table -->
+<div class="block w-2/3 px-2 py-1 mt-1 text-xl border border-gray-500 rounded-md shadow outline-none bg-grey-300">
+  <h1 class="justify-center font-semibold">
+            You have bought:
+  </h1>
+  <table class="w-full table-auto ">
+    <%= thead_tag ['Name', 'Price', 'Quantity', 'Total Price'] %>
+      <tbody class="bg-white divide-y divide-gray-100 dark:divide-gray-400 dark:bg-gray-400">
+        <%  @session_products.each do |x| %>
+          <tr class="text-base">
+            <%= row_tag x, :name, :price, :quantity, :sum %>
+          </tr>
+        <% end %>
+        <tr class="text-base">
+            <td colspan='3' class='indent-1'>Total Sum: </td>
+            <td class='indent-1'><%= @sum %></td>
+        </tr>
+      </tbody>
+  </table>
+
+</div>
+<!-- End Cart table -->
+
+   <%= link_to 'Back to products', products_path, class: "blue-xl-btn" %>
+
+</div>

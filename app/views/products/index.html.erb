@@ -1,0 +1,41 @@
+<div class="flex flex-col items-center w-full">
+
+  <h1 class="justify-center p-3 text-3xl font-semibold rounded-md bg-slate-200">
+  Product List: buy more pay less</h1>
+
+<!-- Start product list -->
+  <div class="container flex px-5 py-2 mx-auto ">
+    <div class="flex flex-wrap">
+      <% @products.each do |product| %>
+        <div class="w-1/4">
+          <%= render product %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<!-- End product list -->
+<!-- Start Cart table -->
+<div class="sticky my-20 overflow-hidden rounded-sm top-100px md:rounded-lg">
+  <h1 class="justify-center text-xl font-semibold bg-green-200 rounded-md">
+            Cart: <%= link_to 'Go to cart', cart_path, class:"green-xs-btn" %>
+  </h1>
+  <table id='cart_tbl' class="divide-y divide-gray-200 min-w-fit dark:divide-gray-700 hover:border-spacing-2">
+    <%= thead_tag ['Product Name', 'Product Price', 'Quantity', 'Total Price'], :small %>
+      <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
+        <%  @session_products.each do |x| %>
+          <tr class="text-sm text-yellow-300">
+            <%= row_tag x, :name, :price, :quantity, :sum %>
+          </tr>
+        <% end %>
+        <tr class="text-sm text-yellow-300">
+            <td colspan='3' class='indent-1'>Total Sum: </td>
+            <td class='indent-1'><%= @sum %></td>
+        </tr>
+      </tbody>
+  </table>
+  <div class="flex justify-center">
+    <%= link_to 'New product', new_product_path, class:"green-xs-btn" %>
+  </div>
+</div>
+<!-- End Cart table -->
