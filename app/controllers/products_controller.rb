@@ -3,12 +3,10 @@ class ProductsController < ApplicationController
     @products = collection
     @session_products = Cart::Supplier.serve session
     @sum = Cart::Summator.serve session
-
   end
 
   def show
     @product = resource
-
   end
 
   def new
@@ -21,6 +19,7 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new product_params
+
     if @product.save
       redirect_to product_path(@product), notice: "Product #{@product.name} created!"
     else
@@ -29,11 +28,13 @@ class ProductsController < ApplicationController
   end
 
   def update
-    @product = resource
-    if @product.update product_params
-      redirect_to product_path(@product), notice: "Product #{@product.name} updated!"
-    else
-      render :edit, status: :unprocessable_entity
+    case params[:action_type]
+    when 'add'
+      Cart::Adder.serve(session, attributes)
+      redirect_to products_path, notice: "Product #{attributes['name']} added to cart!"
+    when "delete"
+      Cart::Remover.serve(session, attributes)
+      redirect_to products_path, notice: "Product #{attributes['name']} removed from cart!"
     end
   end
 
@@ -44,16 +45,20 @@ class ProductsController < ApplicationController
   end
 
   private
+
   def product_params
     params.require(:product).permit(:name, :description, :price, :balance)
   end
 
   def collection
-    Product.all
+    Product.all.ordered
   end
 
   def resource
     collection.find(params[:id])
   end
 
+  def attributes
+    Product.find(params[:id]).attributes
+  end
 end

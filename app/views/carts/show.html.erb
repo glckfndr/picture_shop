@@ -1,34 +1,28 @@
 <div class="flex flex-col w-full mx-auto md:w-2/3">
-<div class="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
-
-<table id='cart_tbl' class="w-full divide-y divide-gray-200 table-auto dark:divide-gray-700 hover:border-spacing-2">
-  <%= thead_tag ['Product Name', 'Product Price', 'Quantity', 'Total Price', 'Actions']%>
-  <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
-    <%  @session_products.each do |x| %>
-      <tr class="text-xl text-yellow-300 hover:bg-gray-400 hover:text-blue-900">
-      <%= row_tag x, :name, :price, :quantity, :sum %>
-        <td class="flex justify-center">
-          <%= button_to '+', plus_path(product_id: x.id ), data: { method: :post} , class:"green-xs-btn" %>
-          <%= button_to '-', minus_path(product_id:  x.id ), data: { method: :post} , class:"cyan-xs-btn" %>
-          <%= button_to 'Delete', del_path(product_id:  x.id ), data: { method: :post} , class:"red-xs-btn" %>
-        </td>
-      </tr>
-    <% end %>
-
-    <tr class="text-xl text-yellow-300 hover:bg-gray-400 hover:text-blue-900">
-
-      <td colspan="3" class="border">Total Sum: </td>
-      <td class="border"><%= @sum %></td>
-
-      <td class="flex justify-center">
-      <%= link_to 'Back', products_path, class: "cyan-xs-btn" %>
-      <%= link_to 'Checkout', new_order_path, class: "green-xs-btn" %>
-      <%= link_to 'Empty', empty_path, data: {turbo_method: :delete}, class: "red-xs-btn" %>
-
-      </td>
-    </tr>
-
-  </tbody>
-</table>
-</div>
+  <div class="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
+    <table id='cart_tbl' class="w-full divide-y divide-gray-200 table-auto dark:divide-gray-700 hover:border-spacing-2">
+      <%= thead_tag ['Product Name', 'Product Price', 'Quantity', 'Total Price', 'Actions']%>
+      <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
+        <%  @session_products.each do |product| %>
+          <tr class="text-xl text-yellow-300 hover:bg-gray-400 hover:text-blue-900">
+            <%= row_tag product, :name, :price, :quantity, :sum %>
+            <td class="flex justify-center">
+              <%= button_to '+', plus_product_path(id: product.id), params: { action_type: "plus" }, class:"green-xs-btn" %>
+              <%= button_to '-', minus_product_path(id: product.id), params: { action_type: "minus" }, class:"cyan-xs-btn" %>
+              <%= button_to 'Delete', del_product_path(id: product.id),params: { action_type: "del" } , class:"red-xs-btn" %>
+            </td>
+          </tr>
+        <% end %>
+        <tr class="text-xl text-yellow-300 hover:bg-gray-400 hover:text-blue-900">
+          <td colspan="3" class="border">Total Sum: </td>
+          <td class="border"><%= @sum %></td>
+          <td class="flex justify-center">
+            <%= link_to 'Back', products_path, class: "cyan-xs-btn" %>
+            <%= link_to 'Checkout', new_order_path, class: "green-xs-btn" %>
+            <%= link_to 'Empty', empty_path, data: {turbo_method: :delete}, class: "red-xs-btn" %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

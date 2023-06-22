@@ -1,30 +1,24 @@
-<div class="flex flex-col w-full mx-auto md:w-2/3">
-  <h1 class="text-3xl font-bold">Show Product</h1>
-
+<div class="flex flex-col items-center mx-auto md:w-1/2">
+  <h1 class="text-2xl font-bold">Show Product</h1>
   <div class="my-1">
     <p class="pr-show">
       Name: <%= @product.name %>
     </p>
-
     <p class="pr-show">
       Description: <%= @product.description %>
     </p>
-
     <p class="pr-show">
-      Price: <%= @product.price %> $
+      Price: <%= number_to_currency(@product.price) %> $
     </p>
-
     <p class="pr-show">
       Left in stock: <%= @product.balance %>
     </p>
-
-    <%= link_to 'Back', products_path,  class: "blue-xl-btn" %>
-    <%= link_to 'Edit', edit_product_path(@product),  class:"green-xl-btn" %>
-    <%= link_to 'Delete', product_path(@product),
-                data: {  turbo_method: :delete, turbo_confirm: "Are you sure?" },  class:"orange-xl-btn" %>
+    <div class="flex">
+      <%= link_to 'Back', products_path,  class: "blue-xl-btn" %>
+      <%= button_to 'Add to Cart', add_product_path(@product),
+                              params: { action_type: "add" } , class:"green-xl-btn" %>
+      <%= button_to 'Delete from Cart', remove_product_path(@product),
+                              params: { action_type: "delete" } , class:"orange-xl-btn" %>
+    </div>
   </div>
 </div>
-
-
-
-<!-- <%= render "attr_table", product: @product %> -->

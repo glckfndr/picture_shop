@@ -1,27 +1,25 @@
 <div class="w-full mx-auto md:w-2/3">
   <h1 class="text-3xl font-bold">New Order</h1>
   <!-- Start Cart table -->
-<div class="block w-2/3 px-3 py-2 mt-2 text-xl border border-gray-500 rounded-md shadow outline-none bg-grey-300'">
-  <h1 class="justify-center font-semibold">
-            You are buying: <%= link_to 'Return to cart', cart_path, class:"green-xs-btn justify-right" %>
-  </h1>
-  <table class="w-full table-auto ">
-    <%= thead_tag ['Name', 'Price', 'Quantity', 'Total Price'] %>
+  <div class="block w-2/3 px-3 py-2 mt-2 text-xl border border-gray-500 rounded-md shadow outline-none bg-grey-300'">
+    <h1 class="justify-center font-semibold">
+      You are buying:     </h1>
+    <table class="w-full table-auto ">
+      <%= thead_tag ['Name', 'Price', 'Quantity', 'Total Price'] %>
       <tbody class="bg-white divide-y divide-gray-100 dark:divide-gray-400 dark:bg-gray-400">
-        <%  @session_products.each do |x| %>
+        <%  @session_products.each do |product| %>
           <tr class="text-base">
-            <%= row_tag x, :name, :price, :quantity, :sum %>
+            <%= row_tag product, :name, :price, :quantity, :sum %>
           </tr>
         <% end %>
         <tr class="text-base">
-            <td colspan='3' class='indent-1'>Total Sum: </td>
-            <td class='indent-1'><%= @sum %></td>
+          <td colspan='3' class='indent-1'>Total Sum: </td>
+          <td class='indent-1'><%= number_to_currency(@sum) %></td>
         </tr>
       </tbody>
-  </table>
-
-</div>
-<!-- End Cart table -->
-
-  <%= render "form", order: @order %>
+    </table>
+  </div>
+  <!-- End Cart table -->
+  <%= render "orders/form", order: @order %>
+  <%= link_to 'Return to cart', cart_path, class:"green-xs-btn justify-right" %>
 </div>

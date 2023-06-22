@@ -6,7 +6,7 @@
 
 @layer components {
   .blue-xs-btn {
-    @apply inline-block px-3 pt-4 mx-1 my-2 text-xs font-medium text-center uppercase bg-blue-500 rounded-r-full hover:bg-blue-700 text-neutral-50;
+    @apply inline-block px-3 pt-6 mx-1 my-2 text-xs font-medium text-center uppercase bg-blue-500 rounded-r-full hover:bg-blue-700 text-neutral-50;
   }
 
   .cyan-xs-btn {
@@ -36,7 +36,7 @@
 
 
   .pr-show {
-    @apply px-4 py-1 my-3 font-serif text-2xl font-semibold truncate rounded-full bg-slate-400;
+    @apply px-4 py-1 font-serif text-xl font-normal bg-slate-400;
   }
 
   .notice-show{

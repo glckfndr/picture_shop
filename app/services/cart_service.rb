@@ -12,8 +12,8 @@ class CartService
   end
 
   private
+
   def current_cart
     @session[:cart] ||= {}
   end
-
 end
