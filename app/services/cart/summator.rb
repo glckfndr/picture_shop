@@ -1,7 +1,6 @@
 class Cart::Summator < CartService
-
   def serve
-    return if current_cart.empty?
+    return 0 if current_cart.empty?
     numbers = current_cart.values.map{|x| x[:amount] || x['amount'] }
     ids = current_cart.keys.map{|x| x.to_i}
     price = Product.find(ids).map{|x| x.price}

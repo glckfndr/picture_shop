@@ -31,9 +31,11 @@ class ProductsController < ApplicationController
     case params[:action_type]
     when 'add'
       Cart::Adder.serve(session, attributes)
+
       redirect_to products_path, notice: "Product #{attributes['name']} added to cart!"
     when "delete"
       Cart::Remover.serve(session, attributes)
+
       redirect_to products_path, notice: "Product #{attributes['name']} removed from cart!"
     end
   end
@@ -41,6 +43,7 @@ class ProductsController < ApplicationController
   def destroy
     @product = resource
     @product.destroy
+
     redirect_to products_path
   end
 

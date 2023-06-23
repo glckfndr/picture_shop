@@ -1,5 +1,4 @@
 class CartsController < ApplicationController
-
   def update
     case params[:action_type]
     when 'plus'
@@ -20,6 +19,7 @@ class CartsController < ApplicationController
 
   def empty
     Cart::Cleaner.serve session
+
     redirect_to cart_path
   end
 
