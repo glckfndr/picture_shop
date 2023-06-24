@@ -7,6 +7,7 @@ RSpec.describe "Products", type: :request do
   describe "GET /products" do
      it "contains the product names" do
         get products_path
+        expect(response).to be_successful
         expect(response.body).to include products.first.name
         expect(response.body).to include products.last.name
      end
@@ -21,6 +22,7 @@ RSpec.describe "Products", type: :request do
 
     it "returns the requested product" do
       get product_path(product)
+      expect(response).to be_successful
       expect(response.body).to include(product.name)
       expect(response.body).to include(product.price.to_s)
     end
@@ -28,9 +30,7 @@ RSpec.describe "Products", type: :request do
 
   describe "DELETE /destroy" do
     it 'deletes the product' do
-      expect {
-        delete product_path(product)
-      }.to change(Product, :count).by(-1)
+      expect {delete product_path(product)}.to change(Product, :count).by(-1)
     end
 
     it 'redirects to the products index' do
