@@ -10,8 +10,8 @@
       Left in stock: <%= product.balance %>
     </p>
     <div class="flex">
-      <%= button_to 'Add to Cart', add_product_path(product), params: { action_type: "add" } , class:"green-xs-btn" %>
-      <%= button_to 'Delete from Cart', remove_product_path(product), params: { action_type: "delete" } , class:"red-xs-btn" %>
+      <%= button_to 'Add to Cart', add_product_path(product) , class:"green-xs-btn" %>
+      <%= button_to 'Delete from Cart', remove_product_path(product) , class:"red-xs-btn" %>
       <%= link_to "Show", product, class:"blue-xs-btn" %>
     </div>
   </div>

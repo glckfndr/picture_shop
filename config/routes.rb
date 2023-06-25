@@ -1,12 +1,15 @@
 Rails.application.routes.draw do
   root "products#index"
+
   resources :products  do
     member do
-      post :add, to: "products#update"
-      post :remove, to: "products#update"
-      post :plus, to: "carts#update"
-      post :minus, to: "carts#update"
-      post :del, to: "carts#update"
+      resource :carts do
+        [:plus, :minus, :del].each do |action|
+          post action, to: "carts#update", as: "#{action}_product_to", defaults: {action_type: "#{action}"}
+        end
+      end
+      post :add, to: "products#update", defaults: {action_type: "add"}
+      post :remove, to: "products#update",  defaults: {action_type: "remove"}
     end
   end
 
