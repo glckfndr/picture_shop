@@ -1,4 +1,4 @@
-class Cart::Summator < CartService
+class CartManager::Summator < CartService
   def serve
     return 0 if current_cart.empty?
     numbers = current_cart.values.map{|x| x[:amount] || x['amount'] }

@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   resources :products  do
     member do
       resource :carts do
-        [:plus, :minus, :del].each do |action|
-          post action, to: "carts#update", as: "#{action}_product_to", defaults: {action_type: "#{action}"}
+        {plus: 'Adder', minus: 'Decreaser', del: 'Remover'}.each do |action, service|
+          post action, to: "carts#update", as: "#{action}_product_to", defaults: {action_type: "#{service}"}
         end
       end
       post :add, to: "products#update", defaults: {action_type: "add"}

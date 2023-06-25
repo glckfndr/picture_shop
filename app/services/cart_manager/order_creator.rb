@@ -1,4 +1,4 @@
-class Cart::OrderCreator < CartService
+class CartManager::OrderCreator < CartService
   def serve
     return nil if current_cart.empty?
     current_cart.each do |key, data|

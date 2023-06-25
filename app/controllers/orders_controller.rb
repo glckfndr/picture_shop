@@ -5,14 +5,14 @@ class OrdersController < ApplicationController
 
   def show
     @order = resource
-    @session_products = Cart::Supplier.serve session
-    @sum = Cart::Summator.serve session
-    Cart::Cleaner.serve session
+    @session_products = CartManager::Supplier.serve session
+    @sum = CartManager::Summator.serve session
+    CartManager::Cleaner.serve session
   end
 
   def new
-    @session_products = Cart::Supplier.serve session
-    @sum = Cart::Summator.serve session
+    @session_products = CartManager::Supplier.serve session
+    @sum = CartManager::Summator.serve session
     @order = Order.new
   end
 
@@ -24,12 +24,12 @@ class OrdersController < ApplicationController
     @order = Order.new order_params
 
     if @order.save
-      Cart::OrderCreator.serve session, @order.attributes
+      CartManager::OrderCreator.serve session, @order.attributes
 
       redirect_to order_path(@order), notice: "Order for #{@order.first_name} crteated!"
     else
-      @session_products = Cart::Supplier.serve session
-      @sum = Cart::Summator.serve session
+      @session_products = CartManager::Supplier.serve session
+      @sum = CartManager::Summator.serve session
 
       render :new, status: :unprocessable_entity
     end

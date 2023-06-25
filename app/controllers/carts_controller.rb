@@ -1,24 +1,16 @@
 class CartsController < ApplicationController
   def update
-    case params[:action_type]
-    when 'plus'
-      Cart::Adder.serve(session, attributes)
-    when "del"
-      Cart::Remover.serve(session, attributes)
-    when "minus"
-      Cart::Decreaser.serve(session, attributes)
-    end
-
+    "CartManager::#{params[:action_type].classify}".constantize.serve(session, attributes)
     redirect_to cart_path
   end
 
   def show
-    @session_products = Cart::Supplier.serve(session)
-    @sum = Cart::Summator.serve(session)
+    @session_products = CartManager::Supplier.serve(session)
+    @sum = CartManager::Summator.serve(session)
   end
 
   def empty
-    Cart::Cleaner.serve session
+    CartManager::Cleaner.serve session
 
     redirect_to cart_path
   end

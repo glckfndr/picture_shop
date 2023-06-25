@@ -1,4 +1,4 @@
-class Cart::Supplier < CartService
+class CartManager::Supplier < CartService
   def serve
     ids = current_cart.keys.map{|id| id.to_i}
     Product.find(ids).inject([]) do |products, product|

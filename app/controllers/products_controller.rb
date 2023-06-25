@@ -1,8 +1,8 @@
 class ProductsController < ApplicationController
   def index
     @products = collection
-    @session_products = Cart::Supplier.serve session
-    @sum = Cart::Summator.serve session
+    @session_products = CartManager::Supplier.serve session
+    @sum = CartManager::Summator.serve session
   end
 
   def show
@@ -30,11 +30,11 @@ class ProductsController < ApplicationController
   def update
     case params[:action_type]
     when 'add'
-      Cart::Adder.serve(session, attributes)
+      CartManager::Adder.serve(session, attributes)
 
       redirect_to products_path, notice: "Product #{attributes['name']} added to cart!"
     when "remove"
-      Cart::Remover.serve(session, attributes)
+      CartManager::Remover.serve(session, attributes)
 
       redirect_to products_path, notice: "Product #{attributes['name']} removed from cart!"
     end
