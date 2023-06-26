@@ -7,13 +7,13 @@ RSpec.describe "Carts", type: :request do
   describe "POST add(plus) and sum" do
     context 'adding products to session:' do
       it 'add one product to session' do
-        post add_product_path(product), params: { action_type: "add" }
+        post add_product_path(product)
         expect(response).to have_http_status(:redirect)
         expect(session[:cart]["#{product.id}"]).to eq({'amount'=> 1, 'balance' => product.balance})
       end
 
       it 'add the same product two times and get sum' do
-        post add_product_path(product), params: { action_type: "add" }
+        post add_product_path(product)
         expect(response).to have_http_status(:redirect)
         post plus_product_to_carts_path(id: product.id)
         expect(response).to have_http_status(:redirect)
@@ -22,17 +22,17 @@ RSpec.describe "Carts", type: :request do
       end
 
       it 'add different two products and get sum' do
-        post add_product_path(product), params: { action_type: "add"  }
+        post add_product_path(product)
         post plus_product_to_carts_path(id: product2.id)
         expect(CartManager::Summator.serve session).to eq(product.price + product2.price)
       end
 
       it 'add different two products and minus last and get sum' do
-        post add_product_path(product), params: { action_type: "add" }
+        post add_product_path(product)
         expect(response).to have_http_status(:redirect)
-        post plus_product_to_carts_path(id: product2.id), params: { action_type: "plus" }
+        post plus_product_to_carts_path(id: product2.id)
         expect(response).to have_http_status(:redirect)
-        post minus_product_to_carts_path(id: product2.id), params: { action_type: "minus" }
+        post minus_product_to_carts_path(id: product2.id)
         expect(response).to have_http_status(:redirect)
         expect(CartManager::Summator.serve session).to eq(product.price)
       end
