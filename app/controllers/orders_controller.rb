@@ -26,7 +26,7 @@ class OrdersController < ApplicationController
     if @order.save
       CartManager::OrderCreator.serve session, @order.attributes
 
-      redirect_to order_path(@order), notice: "Order for #{@order.first_name} crteated!"
+      redirect_to order_path(@order), notice: "Order for #{@order.first_name} was created!"
     else
       @session_products = CartManager::Supplier.serve session
       @sum = CartManager::Summator.serve session
@@ -38,7 +38,7 @@ class OrdersController < ApplicationController
   def update
     @order = resource
     if @order.update order_params
-      redirect_to order_path(@order), notice: "Order for #{@order.first_name} updated!"
+      redirect_to order_path(@order), notice: "Order for #{@order.first_name} was updated!"
     else
       render :edit, status: :unprocessable_entity
     end

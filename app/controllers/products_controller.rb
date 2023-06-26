@@ -33,7 +33,7 @@ class ProductsController < ApplicationController
       CartManager::Adder.serve(session, attributes)
 
       redirect_to products_path, notice: "Product #{attributes['name']} added to cart!"
-    when "remove"
+    when 'remove'
       CartManager::Remover.serve(session, attributes)
 
       redirect_to products_path, notice: "Product #{attributes['name']} removed from cart!"
