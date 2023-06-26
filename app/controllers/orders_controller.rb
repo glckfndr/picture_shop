@@ -25,6 +25,7 @@ class OrdersController < ApplicationController
 
     if @order.save
       CartManager::OrderCreator.serve session, @order.attributes
+      CartManager::BalanceDecreaser.serve session
 
       redirect_to order_path(@order), notice: "Order for #{@order.first_name} was created!"
     else
