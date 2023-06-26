@@ -1,9 +1,9 @@
-<div class="block w-2/3 px-3 py-1 mt-1 text-xl border border-gray-500 rounded-md shadow outline-none bg-grey-300">
-  <table id='order_tbl' class="w-full table-auto ">
+<div class="block w-1/2 px-3 py-1 mt-1 text-sm border border-gray-500 rounded-md shadow outline-none bg-grey-300">
+  <table id='order_tbl' class="w-full table-auto">
     <%= thead_tag ['Attribute', 'Value'] %>
     <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
       <% order.attributes.each do |attr_name, attr_value| %>
-        <tr class="text-xl text-yellow-300 hover:bg-gray-400 hover:text-blue-900">
+        <tr class="text-sm text-yellow-300 hover:bg-gray-400 hover:text-blue-900">
           <td class="px-4 py-2 font-light border"> <strong><%= attr_name.capitalize %>:</strong> </td>
           <td class="px-4 py-2 font-sans italic border hover:not-italic"> <%= attr_value %> </td>
         </tr>

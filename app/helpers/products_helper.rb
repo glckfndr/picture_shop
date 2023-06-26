@@ -1,13 +1,13 @@
 module ProductsHelper
   def thead_tag(header_list, size = :big)
     if size == :small
-      style = 'py-4 font-normal text-center dark:text-gray-400'
+      style = 'border py-4 font-normal text-center dark:text-gray-400'
       th = "<th class=#{style}>"
       (header_list.inject('<thead class="text-sm bg-gray-50 text-gray-50 dark:bg-gray-600"> <tr>') { |thead, column|
          thead + "#{th}#{column}</th>"
        } + '</tr></thead>').html_safe
     else
-      style = 'py-4 font-normal text-center dark:text-gray-400'
+      style = 'border py-4 font-normal text-center dark:text-gray-400'
       th = "<th class=#{style}>"
       (header_list.inject('<thead class="text-2xl bg-gray-50 text-gray-50 dark:bg-gray-800"> <tr>') { |thead, column|
          thead + "#{th}#{column}</th>"

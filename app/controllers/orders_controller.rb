@@ -1,6 +1,9 @@
 class OrdersController < ApplicationController
   def index
-    @orders = collection
+    orders = collection
+    @orders_products = orders.map do |order|
+      order.order_info
+    end
   end
 
   def show
