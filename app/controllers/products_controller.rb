@@ -21,7 +21,7 @@ class ProductsController < ApplicationController
     @product = Product.new product_params
 
     if @product.save
-      redirect_to product_path(@product), notice: "Product #{@product.name} created!"
+      redirect_to product_path(@product), notice: "Product #{@product.name} was created!"
     else
       render :new, status: :unprocessable_entity
     end
@@ -32,11 +32,11 @@ class ProductsController < ApplicationController
     when 'add'
       CartManager::Adder.serve(session, attributes)
 
-      redirect_to products_path, notice: "Product #{attributes['name']} added to cart!"
+      redirect_to products_path, notice: "Product #{attributes['name']} was added to cart!"
     when 'remove'
       CartManager::Remover.serve(session, attributes)
 
-      redirect_to products_path, notice: "Product #{attributes['name']} removed from cart!"
+      redirect_to products_path, notice: "Product #{attributes['name']} was removed from cart!"
     end
   end
 

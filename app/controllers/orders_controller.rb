@@ -1,16 +1,12 @@
 class OrdersController < ApplicationController
   def index
-    orders = collection
-    @orders_products = orders.map do |order|
-      order.order_info
-    end
+    @orders_products = collection.map(&:order_info)
   end
 
   def show
     @order = resource
     @session_products = CartManager::Supplier.serve session
     @sum = CartManager::Summator.serve session
-    CartManager::Cleaner.serve session
   end
 
   def new
@@ -27,10 +23,9 @@ class OrdersController < ApplicationController
     @order = Order.new order_params
 
     if @order.save
-      CartManager::OrderCreator.serve session, @order.attributes
-      CartManager::BalanceDecreaser.serve session
-
+      handle_cart
       redirect_to order_path(@order), notice: "Order for #{@order.first_name} was created!"
+
     else
       @session_products = CartManager::Supplier.serve session
       @sum = CartManager::Summator.serve session
@@ -56,6 +51,12 @@ class OrdersController < ApplicationController
   end
 
   private
+
+  def handle_cart
+    CartManager::OrderCreator.serve session, @order.attributes
+    CartManager::BalanceDecreaser.serve session
+    CartManager::Cleaner.serve session
+  end
 
   def order_params
     params.require(:order).permit(:first_name, :last_name, :address, :phone)
