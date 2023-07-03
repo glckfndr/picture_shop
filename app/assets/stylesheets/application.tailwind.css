@@ -6,7 +6,7 @@
 
 @layer components {
   .blue-xs-btn {
-    @apply inline-block px-3 pt-6 mx-1 my-2 text-xs font-medium text-center uppercase bg-blue-500 rounded-r-full hover:bg-blue-700 text-neutral-50;
+    @apply inline-block px-3 pt-2 mx-1 my-2 text-xs font-medium text-center uppercase bg-blue-500 rounded-r-full sm:pt-4 hover:bg-blue-700 text-neutral-50;
   }
 
   .cyan-xs-btn {

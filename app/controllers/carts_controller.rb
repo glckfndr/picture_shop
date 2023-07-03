@@ -5,8 +5,7 @@ class CartsController < ApplicationController
   end
 
   def show
-    @session_products = CartManager::Supplier.serve(session)
-    @sum = CartManager::Summator.serve(session)
+    @session_products = CartManager::SessionSupplier.serve(session)
   end
 
   def empty

@@ -1,0 +1,19 @@
+ <!-- products table -->
+<table class="m-2 table-auto">
+  <%= thead_tag ['Name', 'Price', 'Quantity', 'Total Price'] %>
+  <tbody class="bg-white border divide-y divide-gray-100 dark:divide-gray-400 dark:bg-gray-400">
+    <%  products.each do |product| %>
+      <tr class="text-base text-center">
+        <td class="border"><%= product[:name] %></td>
+        <td class="border"><%= product[:price] %></td>
+        <td class="border"><%= product[:quantity] %></td>
+        <td class="border"><%= product[:sum] %></td>
+      </tr>
+    <% end %>
+    <tr class="text-base">
+      <td colspan='3' class='indent-1'>Total Sum: </td>
+      <td class='indent-1'><%= total_sum %></td>
+    </tr>
+  </tbody>
+</table>
+<!-- end products table -->

@@ -7,8 +7,8 @@ class CartService
     @balance = product['balance']
   end
 
-  def self.serve(*args, &block)
-    new(*args, &block).serve
+  def self.serve(*args)
+    new(*args).serve
   end
 
   private

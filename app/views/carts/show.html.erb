@@ -3,7 +3,7 @@
     <table id='cart_tbl' class="w-full divide-y divide-gray-200 table-auto dark:divide-gray-700 hover:border-spacing-2">
       <%= thead_tag ['Product Name', 'Product Price', 'Quantity', 'Total Price', 'Actions']%>
       <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
-        <%  @session_products.each do |product| %>
+        <%  @session_products[:products].each do |product| %>
           <tr class="text-xl text-yellow-300 hover:bg-gray-400 hover:text-blue-900">
             <%= row_tag product, :name, :price, :quantity, :sum %>
             <td class="flex justify-center">
@@ -15,7 +15,7 @@
         <% end %>
         <tr class="text-xl text-yellow-300 hover:bg-gray-400 hover:text-blue-900">
           <td colspan="3" class="border">Total Sum: </td>
-          <td class="border"><%= @sum %></td>
+          <td class="border"><%= @session_products[:total_sum] %></td>
           <td class="flex justify-center">
             <%= link_to 'Back', products_path, class: "cyan-xs-btn" %>
             <%= link_to 'Checkout', new_order_path, class: "green-xs-btn" %>

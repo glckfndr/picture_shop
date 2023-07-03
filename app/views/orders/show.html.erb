@@ -9,7 +9,7 @@
     <table class="w-full table-auto ">
       <%= thead_tag ['Name', 'Price', 'Quantity', 'Total Price'] %>
       <tbody class="bg-white divide-y divide-gray-100 dark:divide-gray-400 dark:bg-gray-400">
-        <%  @session_products.each do |product| %>
+        <%  @products.each do |product| %>
           <tr class="text-base">
             <%= row_tag product, :name, :price, :quantity, :sum %>
           </tr>

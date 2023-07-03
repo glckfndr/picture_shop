@@ -7,11 +7,27 @@ class Order < ApplicationRecord
   def order_info
     {
       order: self,
-      total_sum: product_orders.map.inject(0) { |sum, po| sum + (po.product.price * po.amount) },
-      products: product_orders.map do |po|
-                  { name: po.product.name, price: po.product.price, quantity: po.amount,
-                    sum: po.product.price * po.amount }
-                end
+      total_sum: product_orders.map.inject(0) do |sum, product_order|
+                   sum + (product_order.product.price * product_order.amount)
+                 end,
+      products: product_orders.map do |product_order|
+        OpenStruct.new(
+          name: product_order.product.name,
+          price: product_order.product.price,
+          quantity: product_order.amount,
+          sum: product_order.product.price * product_order.amount
+        )
+      end
     }
+  end
+
+  def restore_balance
+    Order.transaction do
+      product_orders.each do |product_order|
+        product = product_order.product
+        product.balance = product.balance + product_order.amount
+        product.save
+      end
+    end
   end
 end

@@ -5,18 +5,18 @@ class OrdersController < ApplicationController
 
   def show
     @order = resource
-    @session_products = CartManager::Supplier.serve session
-    @sum = CartManager::Summator.serve session
+
+    @products = @order.order_info[:products]
   end
 
   def new
-    @session_products = CartManager::Supplier.serve session
-    @sum = CartManager::Summator.serve session
+    @session_products = CartManager::SessionSupplier.serve session
     @order = Order.new
   end
 
   def edit
     @order = resource
+    @order_products = @order.order_info
   end
 
   def create
@@ -27,8 +27,7 @@ class OrdersController < ApplicationController
       redirect_to order_path(@order), notice: "Order for #{@order.first_name} was created!"
 
     else
-      @session_products = CartManager::Supplier.serve session
-      @sum = CartManager::Summator.serve session
+      @session_products = CartManager::SessionSupplier.serve session
 
       render :new, status: :unprocessable_entity
     end
@@ -45,6 +44,7 @@ class OrdersController < ApplicationController
 
   def destroy
     @order = resource
+    @order.restore_balance
     @order.destroy
 
     redirect_to orders_path, notice: "Order for #{@order.first_name} destroyed!"

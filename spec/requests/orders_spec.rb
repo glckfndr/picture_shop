@@ -10,7 +10,7 @@ shared_context 'orders are in db' do
   let!(:orders) { create_list(:order, 4) }
 end
 
-describe 'Orders', type: :request do
+describe 'Order:', type: :request do
   let(:order) { build(:order) }
   context 'orders are in db' do
     include_context 'orders are in db'
