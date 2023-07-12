@@ -1,5 +1,5 @@
 class CartManager::OrderCreator < CartService
-  def serve
+  def call
     return nil if current_cart.empty?
 
     current_cart.each do |id, data|

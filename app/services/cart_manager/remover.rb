@@ -1,5 +1,5 @@
 class CartManager::Remover < CartService
-  def serve
+  def call
     current_cart.delete(@id)
   end
 end

@@ -1,15 +1,15 @@
 class CartsController < ApplicationController
   def update
-    "CartManager::#{params[:action_type].classify}".constantize.serve(session, attributes)
+    "CartManager::#{params[:action_type].classify}".constantize.call(session, attributes)
     redirect_to cart_path, notice: "Product is #{params[:action_type] == 'Adder' ? 'added to' : 'removed from'} cart!"
   end
 
   def show
-    @session_products = CartManager::SessionSupplier.serve(session)
+    @session_products = CartManager::SessionSupplier.call(session)
   end
 
   def empty
-    CartManager::Cleaner.serve session
+    CartManager::Cleaner.call session
 
     redirect_to cart_path, notice: 'Cart is emptied!'
   end

@@ -10,7 +10,7 @@ class OrdersController < ApplicationController
   end
 
   def new
-    @session_products = CartManager::SessionSupplier.serve session
+    @session_products = CartManager::SessionSupplier.call session
     @order = Order.new
   end
 
@@ -27,7 +27,7 @@ class OrdersController < ApplicationController
       redirect_to order_path(@order), notice: "Order for #{@order.first_name} was created!"
 
     else
-      @session_products = CartManager::SessionSupplier.serve session
+      @session_products = CartManager::SessionSupplier.call session
 
       render :new, status: :unprocessable_entity
     end
@@ -53,9 +53,9 @@ class OrdersController < ApplicationController
   private
 
   def handle_cart
-    CartManager::OrderCreator.serve session, @order.attributes
-    CartManager::BalanceDecreaser.serve session
-    CartManager::Cleaner.serve session
+    CartManager::OrderCreator.call session, @order.attributes
+    CartManager::BalanceDecreaser.call session
+    CartManager::Cleaner.call session
   end
 
   def order_params

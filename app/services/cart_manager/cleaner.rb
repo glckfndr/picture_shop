@@ -1,5 +1,5 @@
 class CartManager::Cleaner < CartService
-  def serve
+  def call
     @session[:cart] = nil
   end
 end

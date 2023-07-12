@@ -1,5 +1,5 @@
 class CartManager::Adder < CartService
-  def serve
+  def call
     if current_cart.key?(@id)
       current_cart[@id]['amount'] += 1 if current_cart[@id]['amount'] < current_cart[@id]['balance']
     else

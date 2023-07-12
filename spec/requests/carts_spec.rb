@@ -30,7 +30,7 @@ describe 'CartsController', type: :request do
 
         expect(response).to have_http_status(:redirect)
         expect(session[:cart][product.id.to_s]).to eq({ 'amount' => 2, 'balance' => product.balance })
-        expect(CartManager::Summator.serve(session)).to eq(2 * product.price)
+        expect(CartManager::Summator.call(session)).to eq(2 * product.price)
       end
 
       it 'minus product' do
@@ -38,7 +38,7 @@ describe 'CartsController', type: :request do
 
         expect(response).to have_http_status(:redirect)
         expect(session[:cart][product.id.to_s]).to eq({ 'amount' => 0, 'balance' => product.balance })
-        expect(CartManager::Summator.serve(session)).to eq(0)
+        expect(CartManager::Summator.call(session)).to eq(0)
       end
 
       it 'delete product' do

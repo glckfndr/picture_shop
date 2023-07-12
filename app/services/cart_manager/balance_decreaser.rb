@@ -1,5 +1,5 @@
 class CartManager::BalanceDecreaser < CartService
-  def serve
+  def call
     Product.transaction do
       products = Product.find(current_cart.keys)
       products.each do |product|

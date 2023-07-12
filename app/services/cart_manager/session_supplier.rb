@@ -1,5 +1,5 @@
 class CartManager::SessionSupplier < CartService
-  def serve
+  def call
     {
       products: products_info,
       total_sum: products_info.inject(0) { |total, product| total + product.amount_sum }

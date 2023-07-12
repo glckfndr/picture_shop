@@ -1,5 +1,5 @@
 class CartManager::Summator < CartService
-  def serve
+  def call
     return 0 if current_cart.empty?
 
     ids = current_cart.keys.map(&:to_i)
