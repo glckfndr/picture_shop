@@ -5,7 +5,7 @@
       <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
         <%  @session_products[:products].each do |product| %>
           <tr class="text-xl text-yellow-300 hover:bg-gray-400 hover:text-blue-900">
-            <%= row_tag product, :name, :price, :quantity, :sum %>
+            <%= row_tag product, :name, :price, :quantity, :amount_sum %>
             <td class="flex justify-center">
               <%= button_to '+', plus_product_to_carts_path(id: product.id),  class:"green-xs-btn" %>
               <%= button_to '-', minus_product_to_carts_path(id: product.id),  class:"cyan-xs-btn" %>

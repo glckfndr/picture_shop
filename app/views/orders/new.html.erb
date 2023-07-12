@@ -9,7 +9,7 @@
       <tbody class="bg-white divide-y divide-gray-100 dark:divide-gray-400 dark:bg-gray-400">
         <%  @session_products[:products].each do |product| %>
           <tr class="text-base">
-            <%= row_tag product, :name, :price, :quantity, :sum %>
+            <%= row_tag product, :name, :price, :quantity, :amount_sum %>
           </tr>
         <% end %>
         <tr class="text-base">

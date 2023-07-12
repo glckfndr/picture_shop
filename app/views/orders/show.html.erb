@@ -9,14 +9,14 @@
     <table class="w-full table-auto ">
       <%= thead_tag ['Name', 'Price', 'Quantity', 'Total Price'] %>
       <tbody class="bg-white divide-y divide-gray-100 dark:divide-gray-400 dark:bg-gray-400">
-        <%  @products.each do |product| %>
+        <%  @order_info[:products].each do |product| %>
           <tr class="text-base">
-            <%= row_tag product, :name, :price, :quantity, :sum %>
+            <%= row_tag product, :name, :price, :quantity, :amount_sum %>
           </tr>
         <% end %>
         <tr class="text-base">
           <td colspan='3' class='indent-1'>Total Sum: </td>
-          <td class='indent-1'><%= number_to_currency(@sum) %></td>
+          <td class='indent-1'><%= number_to_currency(@order_info[:total_sum]) %></td>
         </tr>
       </tbody>
     </table>

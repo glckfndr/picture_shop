@@ -1,4 +1,6 @@
 class Order < ApplicationRecord
+  scope :ordered, -> { order(created_at: :desc) }
+
   has_many :product_orders, dependent: :destroy
   has_many :products, through: :product_orders
 
@@ -7,17 +9,8 @@ class Order < ApplicationRecord
   def order_info
     {
       order: self,
-      total_sum: product_orders.map.inject(0) do |sum, product_order|
-                   sum + (product_order.product.price * product_order.amount)
-                 end,
-      products: product_orders.map do |product_order|
-        OpenStruct.new(
-          name: product_order.product.name,
-          price: product_order.product.price,
-          quantity: product_order.amount,
-          sum: product_order.product.price * product_order.amount
-        )
-      end
+      total_sum: order_cost,
+      products: product_info
     }
   end
 
@@ -28,6 +21,27 @@ class Order < ApplicationRecord
         product.balance = product.balance + product_order.amount
         product.save
       end
+    end
+  end
+
+  private
+
+  ProductInfo = Struct.new(:name, :price, :quantity, :amount_sum)
+
+  def product_info
+    product_orders.map do |product_order|
+      ProductInfo.new(
+        product_order.product.name,
+        product_order.product.price,
+        product_order.amount,
+        product_order.product.price * product_order.amount
+      )
+    end
+  end
+
+  def order_cost
+    product_orders.map.inject(0) do |sum, product_order|
+      sum + (product_order.product.price * product_order.amount)
     end
   end
 end

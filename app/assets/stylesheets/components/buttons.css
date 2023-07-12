@@ -1,0 +1,40 @@
+
+@layer base {
+  .blue-xs-btn {
+    @apply inline-block px-3 pt-2 mx-1 my-2 text-xs font-medium text-center uppercase bg-blue-500 rounded-r-full sm:pt-4 hover:bg-blue-700 text-neutral-50;
+  }
+
+  .cyan-xs-btn {
+    @apply inline-block px-3 pt-2 pb-2 mx-1 my-2 text-xs font-medium leading-normal uppercase rounded-md bg-cyan-900 hover:bg-cyan-500 text-neutral-50;
+  }
+
+  .green-xs-btn {
+    @apply inline-block px-3 pt-2 pb-2 mx-1 my-2 text-xs font-medium leading-normal uppercase bg-green-500 rounded-md hover:bg-green-800 text-neutral-50;
+  }
+
+  .red-xs-btn {
+    @apply inline-block px-3 pt-2 pb-2 mx-1 my-2 text-xs font-medium leading-normal uppercase bg-red-500 rounded-md hover:bg-orange-900 text-neutral-50;
+  }
+
+
+  .blue-xl-btn {
+    @apply inline-block px-5 pt-4 pb-2 mx-1 mt-4 text-2xl font-medium leading-normal uppercase bg-blue-500 rounded-md hover:bg-blue-800 text-neutral-50;
+  }
+
+  .orange-xl-btn {
+    @apply inline-block px-5 pt-4 pb-2 mx-1 mt-4 text-2xl font-medium leading-normal uppercase bg-orange-500 rounded-md hover:bg-orange-800 text-neutral-50;
+  }
+
+  .green-xl-btn {
+    @apply inline-block px-5 pt-4 pb-2 mx-1 mt-4 text-2xl font-medium leading-normal uppercase bg-green-500 rounded-md hover:bg-green-800 text-neutral-50;
+  }
+
+
+  .pr-show {
+    @apply px-4 py-1 font-serif text-xl font-normal bg-slate-400;
+  }
+
+  .notice-show{
+    @apply  px-3 py-2 text-xl font-medium text-center text-green-500 rounded-lg bg-green-50;
+  }
+}

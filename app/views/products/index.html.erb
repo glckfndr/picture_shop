@@ -14,7 +14,7 @@
         <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
           <%  @session_products[:products].each do |x| %>
             <tr class="text-sm text-yellow-300">
-              <%= row_tag x, :name, :price, :quantity, :sum %>
+              <%= row_tag x, :name, :price, :quantity, :amount_sum %>
             </tr>
           <% end %>
           <tr class="text-sm text-yellow-300">

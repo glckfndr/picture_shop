@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
   def show
     @order = resource
 
-    @products = @order.order_info[:products]
+    @order_info = @order.order_info
   end
 
   def new
@@ -63,7 +63,7 @@ class OrdersController < ApplicationController
   end
 
   def collection
-    Order.all
+    Order.all.ordered
   end
 
   def resource
