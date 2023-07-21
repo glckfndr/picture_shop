@@ -27,16 +27,18 @@ class ProductsController < ApplicationController
   end
 
   def update
+    return unless params[:action_type] == 'add' || params[:action_type] == 'remove'
+
+    attributes = resource.attributes
     case params[:action_type]
     when 'add'
       CartManager::Adder.call(session, attributes)
-
-      redirect_to products_path, notice: "Product #{attributes['name']} was added to cart!"
+      notice_text = "Product #{attributes['name']} was added to cart!"
     when 'remove'
       CartManager::Remover.call(session, attributes)
-
-      redirect_to products_path, notice: "Product #{attributes['name']} was removed from cart!"
+      notice_text = "Product #{attributes['name']} was removed from cart!"
     end
+    redirect_to products_path, notice: notice_text
   end
 
   def destroy
@@ -58,9 +60,5 @@ class ProductsController < ApplicationController
 
   def resource
     collection.find(params[:id])
-  end
-
-  def attributes
-    Product.find(params[:id]).attributes
   end
 end
