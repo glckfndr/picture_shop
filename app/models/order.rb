@@ -9,7 +9,7 @@ class Order < ApplicationRecord
   def order_info
     {
       order: self,
-      total_sum: order_cost,
+      total_sum: order_price,
       products: product_info
     }
   end
@@ -34,14 +34,14 @@ class Order < ApplicationRecord
         product_order.product.name,
         product_order.product.price,
         product_order.amount,
-        product_order.product.price * product_order.amount
+        product_order.total_price
       )
     end
   end
 
-  def order_cost
+  def order_price
     product_orders.map.inject(0) do |sum, product_order|
-      sum + (product_order.product.price * product_order.amount)
+      sum + product_order.total_price
     end
   end
 end
