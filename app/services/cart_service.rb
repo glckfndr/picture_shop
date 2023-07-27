@@ -5,10 +5,15 @@ class CartService
 
     @id = product['id'].to_s
     @balance = product['balance']
+    @price = product['price']
   end
 
   def self.call(*args)
     new(*args).call
+  end
+
+  def self.clean session
+    session[:cart] = nil
   end
 
   private

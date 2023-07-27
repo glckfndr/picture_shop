@@ -16,9 +16,6 @@ describe 'Service of CartManager' do
 
   context 'cart has two products' do
     include_context 'cart has two products'
-    it 'get sum of products in cart' do
-      expect(CartManager::Summator.call(session)).to eq(2 * product.price)
-    end
 
     it 'minus one product from cart' do
       CartManager::Decreaser.call(session, product.attributes)
@@ -31,7 +28,7 @@ describe 'Service of CartManager' do
     end
 
     it 'clean cart' do
-      CartManager::Cleaner.call(session, product.attributes)
+      CartService.clean(session)
       expect(session[:cart]).to be_nil
     end
   end

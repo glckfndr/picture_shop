@@ -55,7 +55,7 @@ class OrdersController < ApplicationController
   def handle_cart
     CartManager::OrderCreator.call session, @order.attributes
     CartManager::BalanceDecreaser.call session
-    CartManager::Cleaner.call session
+    CartService.clean session
   end
 
   def order_params

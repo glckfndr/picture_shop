@@ -9,7 +9,7 @@ class CartsController < ApplicationController
   end
 
   def empty
-    CartManager::Cleaner.call session
+    CartService.clean session
 
     redirect_to cart_path, notice: 'Cart is emptied!'
   end
